@@ -5,12 +5,14 @@ using namespace std;
 
 struct bullet;
 struct user;
+struct effect;
 
 struct enemy {
 	int x;
 	int y;
 	int state;
 };
+
 
 const int ENEMYNUM = 24;//“G‚Ì”.
 const int ENEMY_RAD = 10; //“G‚Ì”¼Œa.
@@ -19,7 +21,7 @@ const int ENEMY_MOVE_COOLTIME = 1;//“G‚ª“®‚¢‚Ä‚©‚çÄ‚Ñ“®‚­‚Ü‚Å‚ÌƒN[ƒ‹ƒ^ƒCƒ€(ƒtƒ
 const int ENEMYCYCLE = 150; //“G‚Ì“®‚«‚ÌüŠú;
 const int ENEMYBULLETCOOLTIME = 5; //“G‚ÌUŒ‚‚ÌüŠú.
 
-void check_enemy(vector<enemy>& ene, vector<bullet>& bul, int& s); //“G‚Ì¶€‚ğŠm”F.
+void check_enemy(vector<enemy>& ene, vector<bullet>& bul, vector<effect>& eff, int& s); //“G‚Ì¶€‚ğŠm”F.
 void draw_enemy(vector<enemy>& ene); //“G‚ğ•`‰æ.
 void move_enemy(vector<enemy>& ene, int& t); //“G‚ğ“®‚©‚·.
 void enemy_initialize(vector<enemy>& ene);

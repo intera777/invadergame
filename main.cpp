@@ -39,6 +39,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR ldCmdLine
 			DrawString(200, HEIGHT / 2, "インベーダーゲーム(仮)", WHITE);
 			SetFontSize(20);
 			DrawString(250, HEIGHT * 2 / 3, "Sキーを押すとゲームを開始します", WHITE);
+			DrawString(250, HEIGHT * 3 / 4, "右移動:L 左移動:J 弾発射: Z", WHITE);
+			DrawString(700, HEIGHT * 5 / 6, "ver 0.0.2", WHITE);
 			if (CheckHitKey(KEY_INPUT_S) == 1) { 
 				scene = PLAY;
 				game_start_initialize(user1, bul, ene, ene_bul, score, blo, exp_eff);
@@ -58,11 +60,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR ldCmdLine
 			check_block_bullet(bul,blo);
 			draw_block(blo);
 
+			draw_explosion(exp_eff);
+
+
 			//敵が全て倒されたかチェック.
 			check_enemy_completed(scene, ene);
 
 			//敵が倒されたかチェック
-			check_enemy(ene, bul, score);
+			check_enemy(ene, bul, exp_eff, score);
 
 			//敵の移動
 			move_enemy(ene, enemy_cycle);

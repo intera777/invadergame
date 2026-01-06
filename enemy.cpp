@@ -1,15 +1,21 @@
 #pragma once
 #include"invadergame2.h"
 
-void check_enemy(vector<enemy>& ene, vector<bullet>& bul, int& s) {
+void check_enemy(vector<enemy>& ene, vector<bullet>& bul, vector<effect>& eff, int& s) {
 	for (int i = 0; i < ENEMYNUM; i++) {
 		int x1 = ene.at(i).x, y1 = ene.at(i).y;
 		for (int j = 0; j < MAXBULLETNUM; j++) {
 			int x2 = bul.at(j).x, y2 = bul.at(j).y;
-			if (((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) <= (ENEMY_RAD + BULLET_RAD) * (ENEMY_RAD + BULLET_RAD)) && ene.at(i).state == 1) {
+			if (((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) <= (ENEMY_RAD + BULLET_RAD) * (ENEMY_RAD + BULLET_RAD)) && ene.at(i).state == 1 && bul.at(j).state == 1) {
 				ene.at(i).state = 0;
+
+				bul.at(j).x = -100;
+				bul.at(j).y = -100;
 				bul.at(j).state = 0;
 				s += 50;
+				eff.at(i).time = 15;
+				eff.at(i).x = x1 - ENEMY_RAD;
+				eff.at(i).y = y1 - ENEMY_RAD;
 				break;
 			}
 		}
@@ -17,9 +23,11 @@ void check_enemy(vector<enemy>& ene, vector<bullet>& bul, int& s) {
 }
 
 void draw_enemy(vector<enemy>& ene) {
+	int img_enemy = LoadGraph("image/invader1.png");
 	for (int i = 0; i < ENEMYNUM; i++) {
 		if (ene.at(i).state == 1) {
-			DrawCircle(ene.at(i).x, ene.at(i).y, ENEMY_RAD, RED, TRUE);
+			DrawGraph(ene.at(i).x - 10, ene.at(i).y - 10, img_enemy, FALSE);
+			//DrawCircle(ene.at(i).x, ene.at(i).y, ENEMY_RAD, RED, TRUE);
 		}
 	}
 }
