@@ -125,6 +125,8 @@ void enemy_bullet_move(vector<bullet>& bul, int r, int move_vector) {
 	}
 }
 
+
+
 void enemy_draw_bullet(vector<bullet>& bul, int r, int color) {
 	int img_bullet = LoadGraph("image/enemy_bullet.png");
 	for (int i = 0; i < ENEMYNUM; i++) {
